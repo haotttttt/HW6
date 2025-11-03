@@ -1,0 +1,86 @@
+---
+title: "HW6"
+author: "Tong Hao"
+format: html
+embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| message: false
+
+library(tidyverse)
+library(gt)
+library(ISLR2)
+library(usethis)
+```
+
+## Problem 1
+**Step 1: State Hypothesis**
+
+Null hypothesis: $H_0: \mu = 110 \ (\$)$  
+Alternative hypothesis: $H_a: \mu \neq 110 \ (\$)$
+
+```{r}
+glimpse(ISLR2::Carseats)
+mean(ISLR2::Carseats$Price,
+     na.rm = TRUE)
+```
+
+**Step 2: Relevant Visualization**
+```{r}
+ggplot(ISLR2::Carseats, aes(x = Price)) +
+  geom_histogram(fill = "darkgreen", color = "white") +
+  labs(x = "Price",
+       y = "Frequency",
+       title = "Histogram of Average Pirce of Child Carseat") +
+  theme_minimal()
+```
+The distribution is mostly to the right of 100.
+
+```{r}
+t.test(ISLR2::Carseats$Price,
+       mu = 110)
+```
+
+**Step 3: Conclusion**
+Here, the t-statistic of 10.56 means that the sample mean is far away from the hypothesized mean because t-statistic = 0 means that the sample mean equal to the hypothesized mean. The t-statistic of 10.56 indicates many standard error deviated from the hypothesized mean. The p-value of 2.2e-16 means that data like ours will only occur 2.2e-16 of the time when we gather samples of this size, which is extremely small and close to 0. This means that it rejects $H_0: \mu = 100 \ (\$)$.
+
+In conclusion, the data provides strong evidence that the mean price is not 100.
+
+## Problem 2
+```{r}
+mean(ISLR2::Carseats$CompPrice,
+     na.rm = TRUE)
+```
+
+```{r}
+result <- t.test(ISLR2::Carseats$CompPrice,
+       conf.level = 0.90)
+result
+
+str(result)
+```
+
+```{r}
+moe <- (result$conf.int[2] - result$conf.int[1])/2
+moe
+```
+
+The sample mean is 124.975.
+The margin of error is 1.26.
+
+## Problem 3
+```{r}
+glimpse(penguins)
+
+species_island <- table(penguins$species, penguins$island)
+
+addmargins(species_island)
+```
+
+## Problem 4
+
+use_github()
+
+
