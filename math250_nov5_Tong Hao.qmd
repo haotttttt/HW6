@@ -84,3 +84,5 @@ create_github_token()
 gitcreds::gitcreds_set()
 use_github()
 
+The clickable link is: https://github.com/haotttttt/HW6.git.
+
