@@ -25,7 +25,9 @@ Alternative hypothesis: $H_a: \mu \neq 110 \ (\$)$
 glimpse(ISLR2::Carseats)
 mean(ISLR2::Carseats$Price,
      na.rm = TRUE)
+mean
 ```
+The mean price is 115.795.
 
 **Step 2: Relevant Visualization**
 ```{r}
@@ -33,7 +35,7 @@ ggplot(ISLR2::Carseats, aes(x = Price)) +
   geom_histogram(fill = "darkgreen", color = "white") +
   labs(x = "Price",
        y = "Frequency",
-       title = "Histogram of Average Pirce of Child Carseat") +
+       title = "Histogram of Price of Child Carseat") +
   theme_minimal()
 ```
 The distribution is mostly to the right of 100.
@@ -44,9 +46,7 @@ t.test(ISLR2::Carseats$Price,
 ```
 
 **Step 3: Conclusion**
-Here, the t-statistic of 10.56 means that the sample mean is far away from the hypothesized mean because t-statistic = 0 means that the sample mean equal to the hypothesized mean. The t-statistic of 10.56 indicates many standard error deviated from the hypothesized mean. The p-value of 2.2e-16 means that data like ours will only occur 2.2e-16 of the time when we gather samples of this size, which is extremely small and close to 0. This means that it rejects $H_0: \mu = 100 \ (\$)$.
-
-In conclusion, the data provides strong evidence that the mean price is not 100.
+Here, the t-statistic of 10.56 means that the sample mean is far away from the hypothesized mean, since t-statistic of 0 means that the sample mean is equal to the hypothesized mean. The t-statistic of 10.56 indicates that there are many standard error deviated from the 110. The p-value of 2.2e-16 is extremely small, suggesting that our data is very unlikely if the average price is 110 The data provides strong evidence that the mean price is not 110. Therefore, we reject $H_0: \mu = 110 \ (\$)$.
 
 ## Problem 2
 ```{r}
@@ -66,7 +66,7 @@ str(result)
 moe <- (result$conf.int[2] - result$conf.int[1])/2
 moe
 ```
-
+The 90% confidence interval for mean competitor price is in between 123.7109 and 126.2391.
 The sample mean is 124.975.
 The margin of error is 1.26.
 
@@ -83,5 +83,4 @@ addmargins(species_island)
 create_github_token()
 gitcreds::gitcreds_set()
 use_github()
-
 
